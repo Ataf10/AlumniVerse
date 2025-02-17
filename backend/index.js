@@ -1,9 +1,10 @@
-const express = require('express');
-const dotenv = require('dotenv');
-const app = express();
-dotenv.config()
-const PORT = process.env.PORT || 8080;
+require("./db"); // Import database connection
 
-app.listen(8080, () => {
-  console.log("Server on!")
-})
+const express = require("express");
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("MongoDB Atlas is connected!");
+});
+
+app.listen(3000, () => console.log("🚀 Server running on port 3000"));
