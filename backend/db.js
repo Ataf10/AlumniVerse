@@ -1,6 +1,8 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+import dotenv from "dotenv"; // Load environment variables
+dotenv.config();
 
-const mongoURI = "mongodb+srv://alialiataf1234:kej7W9VgitsBLDtT@alumniverse.hrlfc.mongodb.net/?retryWrites=true&w=majority&appName=AlumniVerse"; // Change to your DB name
+const mongoURI = process.env.MONGOURI; // Change to your DB name
 
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,
@@ -14,4 +16,4 @@ db.on("connected", () => console.log("✅ MongoDB connected successfully"));
 db.on("error", (err) => console.error("❌ MongoDB connection error:", err));
 db.on("disconnected", () => console.log("⚠️ MongoDB disconnected"));
 
-module.exports = db;
+export default db;

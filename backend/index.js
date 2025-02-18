@@ -1,10 +1,18 @@
-require("./db"); // Import database connection
+import db from "./db.js";
+import dotenv from "dotenv";
+import express from "express";
+import authRoutes from "./routes/authRoutes.js";
+import cors from "cors";
 
-const express = require("express");
+dotenv.config();
+
 const app = express();
+app.use(cors());
 
-app.get("/", (req, res) => {
-  res.send("MongoDB Atlas is connected!");
-});
+const PORT = process.env.PORT;
+const client = process.env.CLIENT;
 
-app.listen(3000, () => console.log("🚀 Server running on port 3000"));
+app.use("/auth", authRoutes);
+app.listen(PORT, () =>
+  console.log(`🚀 Server running on port ${PORT}\nClient: ${client}`)
+);
