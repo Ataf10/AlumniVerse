@@ -7,4 +7,3 @@ export const config = {
   },
   withCredentials: true,
 };
-console.log(config);

@@ -15,12 +15,10 @@ const ProtectedRoute = ({ children }) => {
     const fetchTokenUser = async () => {
       try {
         const response = await axios.get(`${path}/auth/tokenLogin`, config);
-        console.log(response.data);
         dispatch(addUser(response.data));
       } catch (err) {
         console.log(err);
         navigate("/");
-        console.log(`yahi error hai`);
       }
     };
     fetchTokenUser();

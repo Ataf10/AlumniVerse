@@ -3,7 +3,6 @@ import { GoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { path, config } from "../path";
-
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { addUser } from "../store/features/user";
@@ -84,6 +83,7 @@ const Login = () => {
       );
 
       if (response.data.success) {
+        dispatch(addUser(response.data.user)); // Store user in Redux ✅
         navigate(response.data.exists ? "/feed" : "/");
       }
     } catch (error) {
