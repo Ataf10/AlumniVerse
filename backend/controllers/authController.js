@@ -196,13 +196,12 @@ export const handleTokenLogin = async (req, res) => {
   const token = req.token;
   let email, _id;
   try {
-    console.log(token);
     jwt.verify(token, process.env.JWT_SECRET, (err, data) => {
       if (err) {
         console.log(`err`);
         return res.status(400).json({ error: "Authorization Failed" });
       }
-      console.log(data);
+
       email = data.email;
       _id = data._id;
     });

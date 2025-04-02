@@ -17,7 +17,7 @@ export const authorization = (req, res, next) => {
         return res.status(400).json({ error: "Authorization Failed" });
       }
       req.token = token;
-      console.log(`next called`);
+
       next();
     });
     // ✅ `next()` only runs if verification succeeds

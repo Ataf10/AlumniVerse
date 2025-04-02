@@ -1,57 +1,112 @@
 import { Link, useLocation } from "react-router-dom";
-import { Megaphone, Home, MessageCircle, UserRound } from "lucide-react";
+import { Megaphone, Home, MessageCircle, UserRound, Bell } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Header = () => {
   const location = useLocation();
 
   return (
-    <header className="bg-white shadow-md p-4 flex justify-between items-center">
-      {/* Left Side - Logo */}
-      <div className="text-2xl font-bold text-gray-800">AlumniVerse</div>
+    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo */}
+          <Link to="/" className="flex items-center space-x-2">
+            <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+              <span className="text-xl font-bold text-white">A</span>
+            </div>
+            <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              AlumniVerse
+            </span>
+          </Link>
 
-      {/* Right Side - Navigation Links */}
-      <nav className="flex space-x-6">
-        <NavItem
-          to="/announcements"
-          icon={<Megaphone size={24} />}
-          label="Announcements"
-          active={location.pathname === "/announcements"}
-        />
-        <NavItem
-          to="/feed"
-          icon={<Home size={24} />}
-          label="Feed"
-          active={location.pathname === "/feed"}
-        />
-        <NavItem
-          to="/chat"
-          icon={<MessageCircle size={24} />}
-          label="Chat"
-          active={location.pathname === "/chat"}
-        />
+          {/* Navigation */}
+          <nav className="flex items-center space-x-1">
+            <NavItem
+              to="/announcements"
+              icon={<Megaphone size={20} />}
+              label="Announcements"
+              active={location.pathname === "/announcements"}
+            />
+            <NavItem
+              to="/feed"
+              icon={<Home size={20} />}
+              label="Feed"
+              active={location.pathname === "/feed"}
+            />
+            <NavItem
+              to="/chat"
+              icon={<MessageCircle size={20} />}
+              label="Chat"
+              active={location.pathname === "/chat"}
+              badge={3}
+            />
 
-        <NavItem
-          to="/profile"
-          icon={<UserRound size={"28px"} />}
-          label="Profile"
-          active={location.pathname === "/profile"}
-        />
-      </nav>
+            {/* Notification Bell */}
+            <button className="relative p-2 text-gray-500 hover:text-gray-700 transition-colors">
+              <Bell size={20} />
+              <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+            </button>
+
+            {/* Profile */}
+            <div className="ml-2">
+              <NavItem
+                to="/profile"
+                icon={
+                  <img
+                    src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=40&auto=format&fit=crop"
+                    alt="Profile"
+                    className="w-8 h-8 rounded-full object-cover border-2 border-white shadow-sm"
+                  />
+                }
+                label="Profile"
+                active={location.pathname === "/profile"}
+              />
+            </div>
+          </nav>
+        </div>
+      </div>
     </header>
   );
 };
 
-// Reusable Navigation Item
-const NavItem = ({ to, icon, label, active }) => {
+const NavItem = ({ to, icon, label, active, badge }) => {
   return (
-    <Link
-      to={to}
-      className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition ${
-        active ? "bg-blue-500 text-white" : "text-gray-600 hover:text-blue-500"
-      }`}
-    >
-      {icon}
-      <span>{label}</span>
+    <Link to={to} className="relative group">
+      <div
+        className={`
+        flex items-center space-x-2 px-3 py-2 rounded-xl transition-all duration-200
+        ${
+          active
+            ? "bg-blue-500 text-white shadow-md shadow-blue-500/20"
+            : "text-gray-500 hover:bg-gray-100"
+        }
+      `}
+      >
+        {/* Icon */}
+        <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+          {icon}
+        </motion.div>
+
+        {/* Label */}
+        <span className="text-sm font-medium">{label}</span>
+
+        {/* Badge */}
+        {badge && (
+          <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center">
+            {badge}
+          </span>
+        )}
+      </div>
+
+      {/* Active Indicator */}
+      {active && (
+        <motion.div
+          layoutId="activeIndicator"
+          className="absolute -bottom-[1px] left-0 right-0 h-0.5 bg-blue-500"
+          initial={false}
+          transition={{ type: "spring", stiffness: 380, damping: 30 }}
+        />
+      )}
     </Link>
   );
 };
