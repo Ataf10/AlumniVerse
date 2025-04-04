@@ -124,7 +124,7 @@ const Profile = () => {
           <div className="relative -mt-20 mb-6">
             <div className="relative inline-block">
               <img
-                src="https://lh3.googleusercontent.com/a/ACg8ocK-6I_g1RHT8YHUlyvhUH-S4pMfoslxIgKllKPBsLtbr8CpnXAL=s192-c-mo"
+                src="https://i.pinimg.com/564x/67/a4/eb/67a4eb9dd10bf19780649bcb20aa3f67.jpg"
                 alt="profile pic"
                 className="w-40 h-40 rounded-full border-4 border-white shadow-lg object-cover z-[-1]"
               />
