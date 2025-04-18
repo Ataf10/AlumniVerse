@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Heart,
   MessageCircle,
@@ -17,16 +17,35 @@ import {
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { motion, AnimatePresence } from "framer-motion";
+import { path, config } from "../path";
 
 const PostCard = ({ post, onDelete, onLikeToggle }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [shareModalOpen, setShareModalOpen] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [user, setUser] = useState(null);
+
   const liked = post.isLiked;
 
   const userRedux = useSelector((state) => state.user);
 
   const isUserPost = userRedux._id === post.user._id;
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get(
+          `${path}/api/users/${post.user._id}`,
+          config
+        );
+        setUser(response.data);
+      } catch (err) {
+        console.error("Error fetching user:", err);
+      }
+    };
+
+    fetchUser();
+  }, [post.user._id]);
 
   const handleDelete = async () => {
     try {
@@ -129,8 +148,9 @@ const PostCard = ({ post, onDelete, onLikeToggle }) => {
           <div className="relative">
             <img
               src={
-                post.user?.profilePic ||
-                "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=80&auto=format&fit=crop"
+                user?.user.profilePic
+                  ? user.user.profilePic
+                  : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
               }
               alt={post.user?.name || "User"}
               className="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm"

@@ -1,4 +1,5 @@
 import User from "../models/User.js";
+import { v2 as cloudinary } from "cloudinary";
 
 // ✅ Get User by ID
 export const getUserById = async (req, res) => {
@@ -55,5 +56,53 @@ export const updateUserProfile = async (req, res) => {
       success: false,
       message: "Internal server error",
     });
+  }
+};
+
+export const uploadProfilePicture = async (req, res) => {
+  try {
+    const userId = req.params.id;
+
+    if (!req.file) return res.status(400).json({ message: "No file uploaded" });
+
+    const fileStr = `data:${
+      req.file.mimetype
+    };base64,${req.file.buffer.toString("base64")}`;
+
+    const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
+      folder: "profile_pictures",
+    });
+
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { profilePic: uploadedResponse.secure_url },
+      { new: true }
+    );
+
+    res.status(200).json({ message: "Profile picture updated", user });
+  } catch (err) {
+    console.error("Upload error", err);
+    res.status(500).json({ message: "Failed to upload profile picture" });
+  }
+};
+
+// Remove profile picture
+export const removeProfilePicture = async (req, res) => {
+  try {
+    const userId = req.params.id;
+
+    const user = await User.findByIdAndUpdate(
+      userId,
+      {
+        profilePic:
+          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
+      },
+      { new: true }
+    );
+
+    res.status(200).json({ message: "Profile picture removed", user });
+  } catch (err) {
+    console.error("Remove error", err);
+    res.status(500).json({ message: "Failed to remove profile picture" });
   }
 };

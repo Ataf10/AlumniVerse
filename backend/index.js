@@ -8,7 +8,6 @@ import db from "./db.js"; // ✅ Import database connection
 import cookieParser from "cookie-parser";
 import postRoutes from "./routes/postRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
-import chatRoutes from "./routes/chatRoutes.js";
 
 dotenv.config(); // Load environment variables
 
@@ -37,7 +36,6 @@ app.use(passport.session());
 app.use("/auth", authRoutes);
 app.use("/posts", postRoutes);
 app.use("/api/users", userRoutes);
-app.use("/api/messages", chatRoutes);
 
 // ✅ Start Server
 const PORT = process.env.PORT || 8080;

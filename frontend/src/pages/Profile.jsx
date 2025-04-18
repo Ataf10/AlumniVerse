@@ -21,6 +21,7 @@ const Profile = () => {
   const [error, setError] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({});
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const userRedux = useSelector((state) => state.user);
 
@@ -37,7 +38,6 @@ const Profile = () => {
           `${path}/api/users/${userRedux._id}`,
           config
         );
-        console.log(response.data.user.profilePic);
         setUser(response.data.user);
       } catch (err) {
         console.error("Error fetching user:", err);
@@ -49,10 +49,6 @@ const Profile = () => {
 
     fetchUser();
   }, [userRedux._id]);
-
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
 
   const handleEditClick = () => {
     setFormData({ ...user });
@@ -69,15 +65,34 @@ const Profile = () => {
       const response = await axios.put(
         `${path}/api/users/${userRedux._id}`,
         formData,
-        {
-          config,
-        }
+        config
       );
       setUser(response.data.user);
       setIsEditing(false);
     } catch (err) {
       console.error("Error updating profile:", err);
       setError("Failed to update profile.");
+    }
+  };
+
+  const handleFileChange = (e) => {
+    setSelectedFile(e.target.files[0]);
+  };
+
+  const handleUpload = async () => {
+    const formData = new FormData();
+    formData.append("profilePic", selectedFile);
+
+    try {
+      const response = await axios.put(
+        `${path}/api/users/upload-profile-pic/${userRedux._id}`,
+        formData,
+        config
+      );
+      setUser(response.data.user);
+      setSelectedFile(null);
+    } catch (error) {
+      console.error("Upload error", error);
     }
   };
 
@@ -124,14 +139,37 @@ const Profile = () => {
           <div className="relative -mt-20 mb-6">
             <div className="relative inline-block">
               <img
-                src="https://i.pinimg.com/564x/67/a4/eb/67a4eb9dd10bf19780649bcb20aa3f67.jpg"
+                src={
+                  user.profilePic
+                    ? user.profilePic
+                    : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                }
                 alt="profile pic"
                 className="w-40 h-40 rounded-full border-4 border-white shadow-lg object-cover z-[-1]"
               />
-              <button className="absolute bottom-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-gray-50 transition-colors">
+              <label className="absolute bottom-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-gray-50 transition-colors cursor-pointer">
                 <Camera size={20} className="text-gray-600" />
-              </button>
+                <input
+                  type="file"
+                  className="hidden"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                />
+              </label>
             </div>
+            {selectedFile && (
+              <div className="mt-3 flex gap-3 items-center">
+                <button
+                  onClick={handleUpload}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  Upload Picture
+                </button>
+                <span className="text-sm text-gray-600">
+                  {selectedFile.name}
+                </span>
+              </div>
+            )}
           </div>
 
           {/* User Info */}

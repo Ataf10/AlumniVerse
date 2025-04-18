@@ -1,8 +1,38 @@
 import { Link, useLocation } from "react-router-dom";
 import { Megaphone, Home, MessageCircle, UserRound, Bell } from "lucide-react";
 import { motion } from "framer-motion";
+import axios from "axios";
+
+import { useSelector } from "react-redux";
+import { path, config } from "../../path";
+import { useState, useEffect } from "react";
 
 const Header = () => {
+  const [user, setUser] = useState(null);
+  const userRedux = useSelector((state) => state.user);
+
+  useEffect(() => {
+    if (!userRedux || !userRedux._id) {
+      return;
+    }
+
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get(
+          `${path}/api/users/${userRedux._id}`,
+          config
+        );
+
+        setUser(response.data.user);
+      } catch (err) {
+        console.error("Error fetching user:", err);
+        setError("Failed to fetch user details.");
+      }
+    };
+
+    fetchUser();
+  }, [userRedux._id]);
+
   const location = useLocation();
 
   return (
@@ -47,7 +77,11 @@ const Header = () => {
                 to="/profile"
                 icon={
                   <img
-                    src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=40&auto=format&fit=crop"
+                    src={
+                      user?.profilePic
+                        ? user?.profilePic
+                        : `https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png`
+                    }
                     alt="Profile"
                     className="w-8 h-8 rounded-full object-cover border-2 border-white shadow-sm"
                   />
