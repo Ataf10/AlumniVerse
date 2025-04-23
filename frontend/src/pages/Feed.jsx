@@ -14,7 +14,6 @@ const Feed = () => {
   const fileInputRef = useRef(null);
 
   const user = useSelector((state) => state.user);
-  const dispatch = useDispatch();
 
   const userId = user._id;
 

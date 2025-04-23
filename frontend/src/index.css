@@ -1,1 +1,68 @@
 @import "tailwindcss";
+
+/* Keyframes for smooth 360° rotation with scale */
+@keyframes smoothSpin {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  45% {
+    transform: rotate(10deg) scale(1.1);
+  }
+  55% {
+    transform: rotate(710deg) scale(1.2);
+  }
+  100% {
+    transform: rotate(720deg) scale(1);
+  }
+}
+
+/* Animation: 0.5s spin + 5s pause (total 5.5s cycle) */
+.animate-smooth-spin {
+  animation: smoothSpin 0.5s ease-in-out;
+  animation-iteration-count: infinite;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+  animation-direction: normal;
+  animation-timing-function: ease-in-out;
+  animation-name: smoothSpin;
+  animation-duration: 8s;
+  animation-iteration-count: infinite;
+}
+
+/* Email scrolling */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.marquee-email {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+
+.marquee-email span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee 6s linear infinite;
+  color: #4b5563; /* gray-600 */
+  font-size: 0.875rem;
+}
+
+/* Custom Scrollbar Styles */
+.custom-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: rgba(100, 100, 100, 0.4);
+  border-radius: 3px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}

@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Megaphone, Home, MessageCircle, UserRound, Bell } from "lucide-react";
 import { motion } from "framer-motion";
 import axios from "axios";
-
+import AdminProtectedRoutes from "../../components/adminPortectedRoutes";
 import { useSelector } from "react-redux";
 import { path, config } from "../../path";
 import { useState, useEffect } from "react";
@@ -51,6 +51,15 @@ const Header = () => {
 
           {/* Navigation */}
           <nav className="flex items-center space-x-1">
+            <AdminProtectedRoutes>
+              <NavItem
+                to="/adminDashboard"
+                label="Admin DashBoard"
+                active={location.pathname === "/adminDashboard"}
+                badge={3}
+              />
+            </AdminProtectedRoutes>
+
             <NavItem
               to="/announcements"
               icon={<Megaphone size={20} />}

@@ -3,12 +3,15 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Announcement from "./pages/Announcement";
 import Feed from "./pages/Feed";
+import AdminDashboard from "./pages/AdminDashboard";
 import Layout from "./layouts/Layout";
 import Chat from "./pages/Chat";
 import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
 import CompleteProfile from "./pages/CompleteProfile";
 import ProtectedRoute from "./components/ProtectedRoutes";
+import AdminProtectedRoute from "./components/adminPortectedRoutes";
+import UserProfile from "./pages/UserProfile";
 
 function App() {
   return (
@@ -20,6 +23,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/complete-profile" element={<CompleteProfile />} />
             <Route path="/" element={<Login />} />
+            <Route path="/userProfile/:userId" element={<UserProfile />} />
             <Route
               path="/announcements"
               element={
@@ -49,6 +53,14 @@ function App() {
               element={
                 <Layout>
                   <Chat />
+                </Layout>
+              }
+            />
+            <Route
+              path="/adminDashboard"
+              element={
+                <Layout>
+                  <AdminDashboard />
                 </Layout>
               }
             />

@@ -84,13 +84,11 @@ export const unlikePost = async (req, res) => {
     );
     await post.save();
 
-    res
-      .status(200)
-      .json({
-        success: true,
-        message: "Post unliked",
-        likes: post.likes.length,
-      });
+    res.status(200).json({
+      success: true,
+      message: "Post unliked",
+      likes: post.likes.length,
+    });
   } catch (error) {
     console.error("Unlike Post Error:", error);
     res.status(500).json({ message: "Server Error" });

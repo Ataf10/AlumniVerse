@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
 import {
   Heart,
   MessageCircle,
@@ -159,7 +161,11 @@ const PostCard = ({ post, onDelete, onLikeToggle }) => {
           </div>
           <div>
             <h3 className="font-semibold text-gray-800">
-              {post?.user?.name || "Anonymous"}
+              <Link to={`/userProfile/${user?.user._id}`}>
+                <h3 className="font-semibold text-gray-800 hover:underline">
+                  {post.user.name}
+                </h3>
+              </Link>
             </h3>
             <p className="text-xs text-gray-500">
               {formatDate(post.createdAt)}

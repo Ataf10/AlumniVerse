@@ -13,7 +13,7 @@ const generateToken = (user) => {
     { _id: user._id, email: user.email },
     process.env.JWT_SECRET,
     {
-      expiresIn: "7d",
+      expiresIn: "1d",
     }
   );
 };
@@ -138,7 +138,7 @@ export const handleLogin = async (req, res) => {
       { _id: user._id, email: user.email },
       process.env.JWT_SECRET,
       {
-        expiresIn: "7d",
+        expiresIn: "1d",
       }
     );
 
