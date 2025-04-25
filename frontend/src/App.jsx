@@ -12,6 +12,7 @@ import CompleteProfile from "./pages/CompleteProfile";
 import ProtectedRoute from "./components/ProtectedRoutes";
 import AdminProtectedRoute from "./components/adminPortectedRoutes";
 import UserProfile from "./pages/UserProfile";
+import NotApproved from "./pages/NotApproved";
 
 function App() {
   return (
@@ -61,6 +62,14 @@ function App() {
               element={
                 <Layout>
                   <AdminDashboard />
+                </Layout>
+              }
+            />
+            <Route
+              path="/not-approved"
+              element={
+                <Layout>
+                  <NotApproved />
                 </Layout>
               }
             />

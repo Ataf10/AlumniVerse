@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import {
   Loader2,
   Shield,
@@ -177,6 +178,7 @@ const SectionHeader = ({ title, color, count }) => {
 };
 
 const AdminDashboard = () => {
+  const navigate = useNavigate();
   const [pendingUsers, setPendingUsers] = useState([]);
   const [approvedUsers, setApprovedUsers] = useState([]);
   const [admins, setAdmins] = useState([]);

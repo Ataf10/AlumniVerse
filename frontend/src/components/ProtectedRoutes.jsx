@@ -8,7 +8,7 @@ import { addUser } from "../store/features/user";
 const ProtectedRoute = ({ children }) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const user = useSelector((state) => state.user.email);
+  const user = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -22,8 +22,11 @@ const ProtectedRoute = ({ children }) => {
       }
     };
     fetchTokenUser();
-    if (!user) {
+    if (!user.email) {
       navigate("/", { state: { from: location } });
+    }
+    if (!user.isApproved) {
+      navigate("/not-approved", { state: { from: location } });
     }
   }, [user, navigate]);
 

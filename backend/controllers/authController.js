@@ -205,7 +205,16 @@ export const handleTokenLogin = async (req, res) => {
       email = data.email;
       _id = data._id;
     });
-    return res.status(200).json({ email, _id });
+    const user = await User.findById(_id);
+
+    return res
+      .status(200)
+      .json({
+        email: user.email,
+        _id: user._id,
+        isApproved: user.isApproved,
+        isAdmin: user.isAdmin,
+      });
   } catch (error) {
     return res.status(400).json({ error: "Authorization failed" }); // ✅ Single response
   }

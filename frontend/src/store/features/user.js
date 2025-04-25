@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   email: "",
   _id: "",
+  isApproved: false,
+  isAdmin: false,
 };
 
 export const userSlice = createSlice({
@@ -12,6 +14,8 @@ export const userSlice = createSlice({
     addUser: (state, action) => {
       state.email = action.payload.email;
       state._id = action.payload._id;
+      state.isApproved = action.payload.isApproved;
+      state.isAdmin = action.payload.isAdmin;
     },
 
     removeUser: (state) => {
