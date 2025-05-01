@@ -20,7 +20,7 @@ const AdminProtectedRoutes = ({ children }) => {
     const fetchUser = async () => {
       try {
         const response = await axios.get(
-          `${path}/api/users/${userRedux._id}`,
+          `${path}/api/users/getUserByID/${userRedux._id}`,
           config
         );
         setUser(response.data.user);

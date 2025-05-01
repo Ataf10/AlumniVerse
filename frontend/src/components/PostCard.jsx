@@ -37,7 +37,7 @@ const PostCard = ({ post, onDelete, onLikeToggle }) => {
     const fetchUser = async () => {
       try {
         const response = await axios.get(
-          `${path}/api/users/${post.user._id}`,
+          `${path}/api/users/getUserByID/${post.user._id}`,
           config
         );
         setUser(response.data);

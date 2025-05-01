@@ -24,7 +24,10 @@ const UserProfile = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get(`${path}/api/users/${userId}`, config);
+        const response = await axios.get(
+          `${path}/api/users/getUserByID/${userId}`,
+          config
+        );
         setUser(response.data.user);
       } catch (err) {
         console.error("Error fetching user:", err);

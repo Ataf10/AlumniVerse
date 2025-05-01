@@ -16,7 +16,7 @@ const NotApproved = () => {
     const checkApproval = async () => {
       try {
         const res = await axios.get(
-          `${path}/api/users/${userRedux._id}`,
+          `${path}/api/users/getUserByID/${userRedux._id}`,
           config
         );
         setUser(res.data.user);

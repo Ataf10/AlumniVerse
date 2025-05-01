@@ -26,6 +26,26 @@ const SpecificFeed = ({ userId }) => {
     if (userId) fetchPosts();
   }, [userId]);
 
+  const handleDeletePost = (postId) => {
+    setPosts((prevPosts) => prevPosts.filter((post) => post._id !== postId));
+  };
+
+  const handleLikeToggle = (postId, isLiked) => {
+    setPosts((prevPosts) =>
+      prevPosts.map((post) =>
+        post._id === postId
+          ? {
+              ...post,
+              isLiked,
+              likes: isLiked
+                ? [...post.likes, { user: userId }]
+                : post.likes.filter((like) => like.user !== userId),
+            }
+          : post
+      )
+    );
+  };
+
   if (loading)
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -47,7 +67,14 @@ const SpecificFeed = ({ userId }) => {
       {posts.length === 0 ? (
         <p>No posts available for this user.</p>
       ) : (
-        posts.map((post) => <PostCard key={post._id} post={post} />)
+        posts.map((post) => (
+          <PostCard
+            key={post._id}
+            post={post}
+            onDelete={handleDeletePost}
+            onLikeToggle={handleLikeToggle}
+          />
+        ))
       )}
     </div>
   );

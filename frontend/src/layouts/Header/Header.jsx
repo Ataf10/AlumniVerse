@@ -2,13 +2,14 @@ import { Link, useLocation } from "react-router-dom";
 import { Megaphone, Home, MessageCircle, UserRound, Bell } from "lucide-react";
 import { motion } from "framer-motion";
 import axios from "axios";
-import AdminProtectedRoutes from "../../components/adminPortectedRoutes";
+import AdminProtectedRoutes from "../../components/AdminPortectedRoutes";
 import { useSelector } from "react-redux";
 import { path, config } from "../../path";
 import { useState, useEffect } from "react";
 
 const Header = () => {
   const [user, setUser] = useState(null);
+
   const userRedux = useSelector((state) => state.user);
 
   useEffect(() => {
@@ -19,7 +20,7 @@ const Header = () => {
     const fetchUser = async () => {
       try {
         const response = await axios.get(
-          `${path}/api/users/${userRedux._id}`,
+          `${path}/api/users/getUserByID/${userRedux._id}`,
           config
         );
 
@@ -56,7 +57,7 @@ const Header = () => {
                 to="/adminDashboard"
                 label="Admin DashBoard"
                 active={location.pathname === "/adminDashboard"}
-                badge={3}
+                badge={1}
               />
             </AdminProtectedRoutes>
 
@@ -77,7 +78,7 @@ const Header = () => {
               icon={<MessageCircle size={20} />}
               label="Chat"
               active={location.pathname === "/chat"}
-              badge={3}
+              badge={1}
             />
 
             {/* Profile */}

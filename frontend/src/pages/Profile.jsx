@@ -35,7 +35,7 @@ const Profile = () => {
     const fetchUser = async () => {
       try {
         const response = await axios.get(
-          `${path}/api/users/${userRedux._id}`,
+          `${path}/api/users/getUserByID/${userRedux._id}`,
           config
         );
         setUser(response.data.user);
@@ -63,7 +63,7 @@ const Profile = () => {
     e.preventDefault();
     try {
       const response = await axios.put(
-        `${path}/api/users/${userRedux._id}`,
+        `${path}/api/users/getUserByID/${userRedux._id}`,
         formData,
         config
       );

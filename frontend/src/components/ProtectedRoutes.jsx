@@ -25,6 +25,7 @@ const ProtectedRoute = ({ children }) => {
     if (!user.email) {
       navigate("/", { state: { from: location } });
     }
+
     if (!user.isApproved) {
       navigate("/not-approved", { state: { from: location } });
     }

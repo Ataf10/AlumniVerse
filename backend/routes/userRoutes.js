@@ -5,6 +5,7 @@ import {
   updateUserProfile,
   removeProfilePicture,
   uploadProfilePicture,
+  searchUser,
 } from "../controllers/userController.js";
 import multer from "multer";
 
@@ -14,8 +15,8 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 // ✅ Route to Get User by ID
-router.get("/:id", getUserById);
-router.put("/:id", updateUserProfile);
+router.get("/getUserByID/:id", getUserById);
+router.put("/getUserByID/:id", updateUserProfile);
 
 router.put(
   "/upload-profile-pic/:id",
@@ -29,5 +30,8 @@ router.put(
   upload.single("profilePic"),
   uploadProfilePicture
 );
+
+// Add this at the bottom of userRoutes.js
+router.get("/search", searchUser);
 
 export default router;

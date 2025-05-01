@@ -106,3 +106,21 @@ export const removeProfilePicture = async (req, res) => {
     res.status(500).json({ message: "Failed to remove profile picture" });
   }
 };
+
+export const searchUser = async (req, res) => {
+  const { query } = req.query;
+  console.log("search query", query);
+
+  if (!query) return res.status(400).send("Query is required");
+
+  try {
+    const users = await User.find({
+      name: { $regex: query, $options: "i" }, // Case-insensitive search
+    }).select("-password");
+
+    res.json(users);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server Error");
+  }
+};
