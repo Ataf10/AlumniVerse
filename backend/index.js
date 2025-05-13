@@ -12,7 +12,8 @@ import postRoutes from "./routes/postRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import userChatRoutes from "./routes/userChatRoutes.js";
-
+import broadcastRoutes from "./routes/broadcastRoutes.js";
+import broadcastPostRoutes from "./routes/broadcastPostRoutes.js";
 import { createServer } from "http"; // ✅ Create raw HTTP server
 import { Server } from "socket.io"; // ✅ Import socket.io
 import { sendRoomMessage } from "./controllers/messageController.js";
@@ -48,6 +49,8 @@ app.use("/posts", postRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/userchats", userChatRoutes);
+app.use("/api/broadcast", broadcastRoutes);
+app.use("/api/broadcastPost", broadcastPostRoutes);
 
 // ✅ Setup Socket.io server
 const io = new Server(httpServer, {

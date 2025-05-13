@@ -35,7 +35,7 @@ function App() {
               }
             />
             <Route
-              path="/announcements"
+              path="/broadcast"
               element={
                 <Layout>
                   <Announcement />

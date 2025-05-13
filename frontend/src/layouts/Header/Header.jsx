@@ -62,10 +62,10 @@ const Header = () => {
             </AdminProtectedRoutes>
 
             <NavItem
-              to="/announcements"
+              to="/broadcast"
               icon={<Megaphone size={20} />}
-              label="Announcements"
-              active={location.pathname === "/announcements"}
+              label="Broadcast"
+              active={location.pathname === "/broadcast"}
             />
             <NavItem
               to="/feed"

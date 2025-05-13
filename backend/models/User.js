@@ -2,17 +2,18 @@ import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema(
   {
-    googleId: { type: String, unique: true, sparse: true }, // Store Google ID
+    googleId: { type: String, unique: true, sparse: true },
     name: { type: String, required: true },
     email: { type: String, unique: true, lowercase: true },
     phone: { type: String, unique: true, sparse: true },
-    password: { type: String }, // Not required for Google sign-in
+    password: { type: String },
     isAdmin: { type: Boolean, default: false },
     isApproved: { type: Boolean, default: false },
     profilePic: { type: String, default: "" },
-    batch: { type: String }, // Optional (filled later)
-    department: { type: String }, // Optional (filled later)
+    batch: { type: String },
+    department: { type: String },
     bio: { type: String, default: "" },
+    company: { type: String, default: "" }, // <-- New field added here
   },
   { timestamps: true }
 );

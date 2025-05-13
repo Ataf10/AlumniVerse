@@ -82,7 +82,7 @@ const Footer = () => {
             </h3>
             <ul className="space-y-3">
               {[
-                { to: "/announcement", label: "Announcements" },
+                { to: "/broadcast", label: "Broadcast" },
                 { to: "/feed", label: "Feed" },
                 { to: "/profile", label: "Profile" },
                 { to: "/chat", label: "Chat" },
