@@ -140,5 +140,5 @@ Submit a pull request
 
 📬 Contact
 For suggestions or feedback:
-📧 alumniverse@college.edu
+📧 alialiataf1234@gmail.com
 
