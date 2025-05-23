@@ -1,6 +1,6 @@
 # 🎓 AlumniVerse
 
-AlumniVerse is a MERN-stack based social media platform designed to connect college students and alumni in a seamless and interactive way. It allows current students to engage with alumni, share updates, and build valuable professional relationships within their college network.
+**AlumniVerse** is a MERN-stack based social media platform designed to connect college students and alumni. It provides a space for sharing updates, networking, chatting, and building professional relationships within the college community.
 
 ---
 
@@ -8,47 +8,48 @@ AlumniVerse is a MERN-stack based social media platform designed to connect coll
 
 ### 🔐 Authentication
 - Student login using **phone number**
-- Admin approval required for new users
-- Google login support (OAuth)
+- New users require **admin approval**
+- Google OAuth login supported
 
 ### 📝 Posts & Feed
-- Students and alumni can create and view posts
-- Real-time updates on feed
-- Post likes, comments, and share features
+- Public feed with posts from all users
+- Users can create, delete, and interact with posts
+- Comments and share functionality
 
-### 💬 Messaging
-- One-on-one real-time chat with Socket.IO
-- Chat history saved with timestamps
+### 💬 Chat
+- **One-on-one real-time messaging** using Socket.IO
+- Chat history with timestamps
 
 ### 🧑‍💼 Admin Dashboard
+- Approve or reject new users
 - View and manage all users and posts
-- Approve or reject new registrations
-- Display all current admins in a dedicated section
+- Display list of current admins
 
 ### 👤 Profile Management
-- View and edit personal profile
-- Upload or remove profile pictures via Cloudinary
+- View and update personal profiles
+- Upload/remove profile picture (Cloudinary support)
 
 ---
 
 ## 🛠 Tech Stack
 
-| Frontend       | Backend          | Database   | Other Tools     |
-|----------------|------------------|------------|------------------|
-| React.js       | Express.js       | MongoDB    | Tailwind CSS     |
-| Vite           | Node.js          | Mongoose   | Socket.IO        |
-| Framer Motion  | Passport.js      |            | Cloudinary       |
+**Frontend**: React, Vite, Tailwind CSS, Framer Motion  
+**Backend**: Node.js, Express.js, MongoDB, Mongoose  
+**Real-Time**: Socket.IO  
+**Authentication**: Passport.js, Google OAuth  
+**Media**: Cloudinary
 
 ---
 
-## 🗂 Folder Structure
+## 📁 Folder Structure
 
 /client
-├── src
-│ ├── components
-│ ├── pages
-│ ├── context
-│ └── App.jsx
+└── src
+├── components
+├── pages
+├── context
+└── App.jsx
+
 /server
 ├── controllers
 ├── models
@@ -62,31 +63,34 @@ Edit
 
 ---
 
-## 📦 Installation
+## ⚙️ Setup & Installation
 
 ### 1. Clone the repository
-```bash
+
+```
 git clone https://github.com/your-username/alumniverse.git
 cd alumniverse
+```
 2. Install dependencies
 Client:
 
-bash
+```
 Copy
 Edit
 cd client
-npm install
+pnpm install
+
+```
 Server:
 
-bash
+```
 Copy
 Edit
 cd ../server
-npm install
-3. Set up environment variables
-Create a .env file in the server directory with:
-
-env
+pnpm install
+```
+3. Create .env in /server
+```env
 Copy
 Edit
 PORT=5000
@@ -97,50 +101,44 @@ CLOUDINARY_API_SECRET=your_api_secret
 GOOGLE_CLIENT_ID=your_google_client_id
 GOOGLE_CLIENT_SECRET=your_google_client_secret
 SESSION_SECRET=your_session_secret
+```
 4. Run the application
 Client:
 
-bash
+```
 Copy
 Edit
-npm run dev
+pnpm run dev
+```
 Server:
 
-bash
+```
 Copy
 Edit
-npm start
-🧪 Future Enhancements
-Group chat functionality
+pnpm run nodemon
 
-Alumni tagging and mentorship request
+```
+📈 Future Features
+Group chats
 
-Event creation and RSVP
+Event announcements and RSVPs
 
-Notification system
+Notifications & email updates
+
+Alumni tagging and mentorship system
 
 🤝 Contributing
-Fork the repository
+Fork this repo
 
-Create your feature branch (git checkout -b feature-name)
+Create a branch: git checkout -b feature-name
 
-Commit your changes (git commit -m 'Add feature')
+Commit your changes: git commit -m 'Add feature'
 
-Push to the branch (git push origin feature-name)
+Push to the branch: git push origin feature-name
 
-Open a pull request
+Submit a pull request
 
 📬 Contact
-Have questions or suggestions?
-Email us at: alumniverse@college.edu
+For suggestions or feedback:
+📧 alumniverse@college.edu
 
-📄 License
-This project is licensed under the MIT License.
-
-yaml
-Copy
-Edit
-
----
-
-Would you like me to generate this as a downloadable file or integrate badges (e.g., build, licen
